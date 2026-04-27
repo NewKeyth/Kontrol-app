@@ -2,7 +2,7 @@
   <img src="docs/readme_logo.png" width="200" alt="KONTROL Logo">
 </p>
 
-<h1 align="center">🎮 KONTROL App</h1>
+<h1 align="center"> KONTROL App</h1>
 
 <p align="center">
   <strong>Convierte tu smartphone en un gamepad de Xbox 360 de alto rendimiento y cero latencia.</strong>
@@ -73,4 +73,4 @@ Este proyecto no es solo código; es una declaración de intenciones. Nace de un
 *Si eres un reclutador, un ingeniero de software, o un entusiasta del diseño, te invito a ver este repositorio no solo como un software, sino como una muestra de **Product Leadership** y resiliencia creativa.*
 
 ---
-<p align="center">Creado con 💻 y ☕ por Keyber. 2026.</p>
+<p align="center">Creado con 💻 y ☕ por Keyber.</p>
