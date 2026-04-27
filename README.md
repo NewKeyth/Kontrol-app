@@ -70,7 +70,5 @@ Este proyecto no es solo código; es una declaración de intenciones. Nace de un
 - **El Futuro: Dirección de Productos Digitales:** Aspiro a liderar y dirigir la creación de productos tecnológicos. Mi objetivo es ser el puente entre el diseño, la tecnología y el negocio, asegurando que cada producto no solo funcione, sino que encante al usuario.
 - **IA como Co-Piloto:** El código fuente ha sido desarrollado con el apoyo estratégico de **Inteligencia Artificial**. Para mí, la IA no reemplaza al creador, sino que potencia su capacidad de ejecución mientras continúo mi formación técnica.
 
-*Si eres un reclutador, un ingeniero de software, o un entusiasta del diseño, te invito a ver este repositorio no solo como un software, sino como una muestra de **Product Leadership** y resiliencia creativa.*
-
 ---
 <p align="center">Creado con 💻 y ☕ por Keyber.</p>
