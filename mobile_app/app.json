@@ -1,0 +1,54 @@
+{
+  "expo": {
+    "name": "KONTROL",
+    "slug": "kontrol",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/Splash.imagen.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "newArchEnabled": false,
+    "ios": {
+      "supportsTablet": false
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png",
+        "backgroundColor": "#0F1711"
+      },
+      "package": "com.kontrol.gamepad",
+      "permissions": [
+        "VIBRATE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-screen-orientation",
+      "expo-navigation-bar",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ],
+      "expo-asset",
+      "expo-font"
+    ],
+    "extra": {
+      "expo-navigation-bar": {},
+      "eas": {
+        "projectId": "d93ab8bf-6453-4028-af9d-af28309b7eae"
+      }
+    }
+  }
+}

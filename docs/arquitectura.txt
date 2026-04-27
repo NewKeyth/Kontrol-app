@@ -1,0 +1,41 @@
+KONTROL - Mapa Arquitectónico Oficial
+=========================================
+
+Tras la consolidación y limpieza profunda, esta es la estructura técnica final que gobierna el proyecto KONTROL. Todo archivo legado o experimental (como servidor.py o servidor_js.py) ha sido eliminado para mantener la pureza del código.
+
+## 🧠 BACKEND (Cerebro del Servidor)
+
+1. `main.py` -> [Única Fuente de Verdad]
+Es el archivo principal y el único ejecutable necesario. Cumple tres funciones vitales en paralelo:
+- **Hilo 1**: Ejecuta un servidor HTTP puro en el puerto 8080 para servir los archivos de la carpeta `web/`.
+- **Hilo 2**: Levanta el WebSocket "Admin" en el puerto 5006, que mantiene escuchando infinitamente las órdenes de apagado/encendido de la interfaz en la PC.
+- **Hilo 3**: Gestiona el WebSocket "Gamepad" en el puerto 5005, que recibe frenéticamente (cada 16ms) los movimientos analógicos y botones presionados desde los celulares.
+
+2. `gamepad_driver.py` -> [Motor de Abstracción de Hardware]
+Es un archivo puente inteligente. Su trabajo es detectar en qué Sistema Operativo estás parado al segundo que abrís la app. Si es Windows, levanta los drivers de `vgamepad`. Si es Linux, usa `evdev` y `uinput`. Esto logra que KONTROL tenga "Latencia Cero" sin importar dónde lo instales.
+
+3. `requirements.txt`
+El listado de las dependencias de Python (vgamepad, websockets, etc) necesarias para instalar localmente si algún programador quiere editar tu servidor.
+
+## 🖥 FRONTEND PC (Interfaz Web Desktop)
+
+1. Carpeta `desktop_ui/`
+Contiene la interfaz gráfica minimalista que ve el usuario en su PC al dar doble clic al ejecutable. 
+- `index.html`: La estructura visual.
+- `style.css`: Tonos oscuros, neones y animaciones CSS (Pulsaciones del botón power).
+- `main.js`: Lógica gráfica que se conecta al WebSocket Admin (puerto 5006) en localhost y permite controlar el estado del servidor sin usar consolas negras.
+- `favicon.io/` y archivos `.png` / `.ico`: El sistema integral de iconos para inyectar branding a pestañas y al binario ejecutable final.
+
+## 📱 FRONTEND MOBILE (App Celular)
+
+1. Carpeta `mobile_app/`
+El corazón del mando. Construido íntegramente en **React Native con Expo**.
+Contiene las pantallas de control clásico y Pro-Racing, la lógica hápica (vibraciones del motor del celular) y la conexión WebSocket en tiempo real hacia el servidor de la PC.
+
+## 🚀 DEVOPS Y DISTRIBUCIÓN
+
+1. Directorio `.github/workflows/build.yml`
+Es el "Robot Constructur" en la nube. Cuando haces un "git push", GitHub lee este archivo, alquila temporalmente una PC con Windows y otra con Linux, y usa PyInstaller para aplastar `main.py` junto con la carpeta `desktop_ui/` en un solo archivo binario/ejecutable `.exe`. 
+
+2. Carpetas `build/` y `dist/` (Generadas Automáticamente)
+Solo existen en las computadoras locales tras una compilación. `dist/` almacena el preciado ejecutable final listo para distribución.

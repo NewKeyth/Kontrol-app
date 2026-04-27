@@ -1,0 +1,17 @@
+# Kontrol App Dependencies
+# Install with: pip install -r requirements.txt
+
+# WebSocket server for real-time communication
+websockets>=12.0
+
+# Virtual gamepad for Xbox 360 controller emulation
+vgamepad>=0.0.1
+
+# Modern tkinter UI library
+customtkinter>=5.2.0
+
+# System tray integration
+pystray>=0.19.5
+
+# Image processing for icons
+Pillow>=10.0.0

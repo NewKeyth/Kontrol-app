@@ -1,0 +1,6 @@
+# KONTROL PROJECT - Reglas Maestras
+- Siempre priorizar el rendimiento: La latencia en el Gamepad debe ser mínima.
+- Estilo de código: Python (PEP 8), React Native (Functional Components + Hooks).
+- Idioma: Comentarios en código y documentación en español.
+- Arquitectura: El servidor de Python es la "fuente de verdad" para el estado de la conexión.
+- Uso de Material Design: Toda la interfaz móvil debe seguir los principios de Material Design.

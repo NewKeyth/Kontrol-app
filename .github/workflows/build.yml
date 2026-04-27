@@ -1,0 +1,54 @@
+name: Build KONTROL Desktop Executables
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install System Dependencies (Linux)
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3-dev build-essential
+
+    - name: Install Python Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller eel websockets
+        pip install evdev || echo "evdev not supported natively on Windows, skipping"
+        pip install vgamepad || echo "vgamepad not supported natively on Linux, skipping"
+
+    - name: Compile with PyInstaller (Linux)
+      if: runner.os == 'Linux'
+      run: |
+        pyinstaller --noconfirm --onefile --console --icon=icon.ico --add-data "desktop_ui:desktop_ui" --name "KONTROL_Server_Linux" main.py
+
+    - name: Compile with PyInstaller (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        pyinstaller --noconfirm --onefile --console --icon=icon.ico --add-data "desktop_ui;desktop_ui" --name "KONTROL_Server_Windows" main.py
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: KONTROL_Executables_${{ matrix.os }}
+        path: dist/

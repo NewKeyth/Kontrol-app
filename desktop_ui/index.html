@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KONTROL PANEL</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&family=Consolas&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <h1 class="glow-text">KONTROL</h1>
+            <p id="ip-display" class="ip-text">IP: Conectando...</p>
+        </header>
+
+        <!-- Power Button -->
+        <div class="power-container">
+            <div id="pulse-ring" class="pulse-ring"></div>
+            <div id="power-btn" class="power-btn offline">
+                <svg viewBox="0 0 24 24" class="power-icon" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                    <line x1="12" y1="2" x2="12" y2="12"></line>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Players Grid -->
+        <div class="players-grid">
+            <div class="player-slot" id="slot-1">
+                <div class="led"></div>
+                <div class="player-info">
+                    <div class="player-name">PLAYER 1</div>
+                    <div class="player-status">OFFLINE</div>
+                </div>
+            </div>
+            <div class="player-slot" id="slot-2">
+                <div class="led"></div>
+                <div class="player-info">
+                    <div class="player-name">PLAYER 2</div>
+                    <div class="player-status">OFFLINE</div>
+                </div>
+            </div>
+            <div class="player-slot" id="slot-3">
+                <div class="led"></div>
+                <div class="player-info">
+                    <div class="player-name">PLAYER 3</div>
+                    <div class="player-status">OFFLINE</div>
+                </div>
+            </div>
+            <div class="player-slot" id="slot-4">
+                <div class="led"></div>
+                <div class="player-info">
+                    <div class="player-name">PLAYER 4</div>
+                    <div class="player-status">OFFLINE</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Console -->
+        <textarea id="console" class="console" readonly></textarea>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
