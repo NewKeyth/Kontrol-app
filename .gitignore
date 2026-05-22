@@ -54,3 +54,7 @@ Thumbs.db
 agente.md
 contexto_proyecto.txt
 clinerules
+
+# --- Custom build/patch artifacts ---
+vgamepad-*/
+vgamepad-*.tar.gz

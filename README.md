@@ -45,6 +45,9 @@ Abre tu Terminal y pega esto:
 curl -sL https://raw.githubusercontent.com/NewKeyth/Kontrol-app/main/install.sh | bash
 ```
 
+> [!IMPORTANT]
+> **Nota para Linux:** Una vez finalizada la instalación, es obligatorio **cerrar sesión y volver a entrar** (o reiniciar el sistema) para que tu usuario se incorpore al grupo `input` y puedas usar el gamepad sin requerir permisos de administrador (`sudo`).
+
 ### 📱 Instalación del Celular (Android)
 Abre la pestaña de **[Releases]** en GitHub desde tu celular y descarga la `KONTROL_App.apk`. Instálala, conéctate al mismo Wi-Fi y digita la IP que aparece en la computadora.
 
