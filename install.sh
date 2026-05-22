@@ -8,6 +8,20 @@ BIN_DIR="$HOME/.local/bin"
 
 mkdir -p "$ICON_DIR" "$BIN_DIR" "$DESKTOP_DIR"
 
+# --- CONFIGURACIÓN DE UDEV PARA UINPUT ---
+echo "-> Configurando reglas udev para emulación de gamepad sin requerir sudo..."
+if [ ! -f /etc/udev/rules.d/85-kontrol-uinput.rules ]; then
+    echo "Se solicitarán permisos de administrador (sudo) para crear la regla udev."
+    sudo tee /etc/udev/rules.d/85-kontrol-uinput.rules > /dev/null << 'EOF'
+KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"
+EOF
+    sudo usermod -aG input "$USER"
+    sudo udevadm control --reload-rules && sudo udevadm trigger
+    echo -e "\033[1;33m[!] Regla udev instalada. NOTA: Debes cerrar sesión y volver a entrar (o reiniciar) para que tu usuario aplique al grupo 'input' y puedas usar los controles.\033[0m"
+else
+    echo "Regla udev ya configurada previamente."
+fi
+
 echo "-> Descargando Servidor Invisible..."
 curl -L -o "$BIN_DIR/KONTROL_Server" "https://github.com/NewKeyth/Kontrol-app/releases/latest/download/KONTROL_Server_Linux"
 chmod +x "$BIN_DIR/KONTROL_Server"
@@ -16,19 +30,18 @@ echo "-> Descargando Ícono de Alta Resolución..."
 curl -sL -o "$ICON_DIR/icon.png" "https://raw.githubusercontent.com/NewKeyth/Kontrol-app/main/mobile_app/assets/icon.png"
 
 echo "-> Generando App en el Escritorio..."
-cat << 'EOF' > "$DESKTOP_DIR/KONTROL.desktop"
+cat << EOF > "$DESKTOP_DIR/KONTROL.desktop"
 [Desktop Entry]
 Version=1.0
 Name=KONTROL
 Comment=Servidor Híbrido Gamepad WebSockets
-Exec=sh -c "sudo ~/.local/bin/KONTROL_Server"
+Exec=sh -c "$BIN_DIR/KONTROL_Server"
 Terminal=true
 Type=Application
-Icon=__ICON_PATH__
+Icon=$ICON_DIR/icon.png
 Categories=Game;Utility;
 EOF
 
-sed -i "s|__ICON_PATH__|$ICON_DIR/icon.png|g" "$DESKTOP_DIR/KONTROL.desktop"
 chmod +x "$DESKTOP_DIR/KONTROL.desktop"
 
 # Confiar en la app si estamos en GNOME

@@ -32,11 +32,13 @@ def start_web_server():
         base_path = os.path.abspath(".")
     
     web_dir = os.path.join(base_path, "desktop_ui")
-    os.chdir(web_dir)
     
-    Handler = http.server.SimpleHTTPRequestHandler
+    class ThreadSafeHandler(http.server.SimpleHTTPRequestHandler):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, directory=web_dir, **kwargs)
+    
     socketserver.TCPServer.allow_reuse_address = True
-    with socketserver.TCPServer(("0.0.0.0", 8080), Handler) as httpd:
+    with socketserver.TCPServer(("0.0.0.0", 8080), ThreadSafeHandler) as httpd:
         print("Servidor UI Web iniciado en http://localhost:8080")
         httpd.serve_forever()
 
