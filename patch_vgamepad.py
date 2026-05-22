@@ -8,9 +8,32 @@ import re
 def main():
     print("Starting custom vgamepad patcher for headless CI environment...")
     
-    # 1. Download vgamepad source package from PyPI
-    print("Downloading vgamepad source from PyPI...")
-    subprocess.run([sys.executable, "-m", "pip", "download", "vgamepad", "--no-binary", ":all:"], check=True)
+    # 1. Download vgamepad source package from PyPI via HTTP to avoid running setup.py which hangs on Windows GHA
+    print("Downloading vgamepad source from PyPI via HTTP...")
+    import urllib.request
+    import json
+    
+    try:
+        url = "https://pypi.org/pypi/vgamepad/json"
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req) as response:
+            data = json.loads(response.read().decode('utf-8'))
+        
+        tgz_url = None
+        for u in data['urls']:
+            if u['packagetype'] == 'sdist' and u['filename'].endswith('.tar.gz'):
+                tgz_url = u['url']
+                break
+        
+        if not tgz_url:
+            raise ValueError("No sdist found")
+    except Exception as e:
+        print(f"Warning: PyPI JSON API failed ({e}). Using fallback.")
+        tgz_url = "https://files.pythonhosted.org/packages/b8/b2/24584285b0d099951659779df52c1efec0082987a0701041b6be9c5123fc/vgamepad-0.1.0.tar.gz"
+        
+    print(f"Downloading from: {tgz_url}")
+    urllib.request.urlretrieve(tgz_url, "vgamepad-0.1.0.tar.gz")
+    print("Download completed successfully!")
     
     # Find the downloaded archive
     archives = glob.glob("vgamepad-*.tar.gz")
