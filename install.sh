@@ -35,7 +35,7 @@ cat << EOF > "$DESKTOP_DIR/KONTROL.desktop"
 Version=1.0
 Name=KONTROL
 Comment=Servidor Híbrido Gamepad WebSockets
-Exec=sh -c "$BIN_DIR/KONTROL_Server"
+Exec=$BIN_DIR/KONTROL_Server
 Terminal=true
 Type=Application
 Icon=$ICON_DIR/icon.png
