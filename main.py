@@ -277,7 +277,23 @@ if __name__ == '__main__':
     print("--------------------------------------------------------------\n")
     
     import webbrowser
-    threading.Timer(1.5, lambda: webbrowser.open('http://localhost:8080')).start()
+    def open_browser():
+        # Limpiar LD_LIBRARY_PATH para evitar que PyInstaller interfiera con el navegador del sistema (libssl bug)
+        env_ld_path = os.environ.get("LD_LIBRARY_PATH")
+        if "LD_LIBRARY_PATH_ORIG" in os.environ:
+            os.environ["LD_LIBRARY_PATH"] = os.environ["LD_LIBRARY_PATH_ORIG"]
+        elif "LD_LIBRARY_PATH" in os.environ:
+            del os.environ["LD_LIBRARY_PATH"]
+        
+        try:
+            webbrowser.open('http://localhost:8080')
+        except Exception:
+            pass
+        finally:
+            if env_ld_path is not None:
+                os.environ["LD_LIBRARY_PATH"] = env_ld_path
+
+    threading.Timer(1.5, open_browser).start()
     
     try:
         while True:
