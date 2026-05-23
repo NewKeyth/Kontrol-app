@@ -20,7 +20,7 @@
 
 **KONTROL** es un ecosistema híbrido que une la potencia del hardware de PC con la versatilidad de los smartphones actuales. Permite conectar hasta 4 dispositivos móviles simultáneamente a una PC, emulando controles físicos mediante WebSockets de máxima velocidad.
 
-## ✨ Características Premium
+##  Características
 - 🎮 **Multi-jugador Simultáneo**: Hasta 4 jugadores en la misma red Wi-Fi sin colisión de paquetes.
 - ⚡ **Latencia Mínima (H-Bridge)**: Motor de comunicación por sockets puros, procesando entradas cada 16ms.
 - 🏎️ **Modos de Control Híbridos**: Mando Clásico y modo Carreras Pro.
